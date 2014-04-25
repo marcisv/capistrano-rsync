@@ -95,4 +95,9 @@ namespace :rsync do
   # Matches the naming scheme of git tasks.
   # Plus was part of the public API in Capistrano::Rsync <= v0.2.1.
   task :create_release => %w[release]
+
+  desc 'Determine the revision that will be deployed'
+  task :set_current_revision do
+    set :current_revision, `git rev-parse --short #{fetch(:branch)}`
+  end
 end
